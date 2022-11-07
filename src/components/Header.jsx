@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-class Sidebar extends React.Component {
+class Header extends React.Component {
   render() {
     return (
-      <section className="sidebar">
-        <p>Sidebar</p>
+      <header data-testid="header-component">
+        <p>Header</p>
         <nav>
           <Link to="/"> / </Link>
           <Link to="/search"> Search </Link>
@@ -14,9 +14,9 @@ class Sidebar extends React.Component {
           <Link to="/profile"> Profile </Link>
           <Link to="/profile/edit"> ProfileEdit </Link>
         </nav>
-      </section>
+      </header>
     );
   }
 }
 
-export default Sidebar;
+export default Header;

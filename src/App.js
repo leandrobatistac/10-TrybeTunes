@@ -1,5 +1,4 @@
 import React from 'react';
-import Sidebar from './components/Sidebar';
 import Content from './components/Content';
 
 class App extends React.Component {
@@ -7,7 +6,6 @@ class App extends React.Component {
     return (
       <div>
         <p>TrybeTunes</p>
-        <Sidebar />
         <Content />
       </div>
     );
