@@ -1,11 +1,17 @@
 import React from 'react';
+import Sidebar from './components/Sidebar';
+import Content from './components/Content';
 
 class App extends React.Component {
   render() {
-    return (<p>TrybeTunes</p>);
+    return (
+      <div>
+        <p>TrybeTunes</p>
+        <Sidebar />
+        <Content />
+      </div>
+    );
   }
 }
 
 export default App;
-
-// Teste
