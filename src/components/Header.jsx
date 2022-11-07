@@ -1,13 +1,35 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { getUser } from '../services/userAPI';
+import Loading from './Loading';
 
 class Header extends React.Component {
+  state = {
+    carregando: false,
+    usuarioLogado: {},
+  };
+
+  async componentDidMount() {
+    this.setState({ carregando: true });
+    const usuario = await getUser();
+    this.setState({
+      usuarioLogado: usuario,
+      carregando: false,
+    });
+  }
+
   render() {
+    const { carregando, usuarioLogado } = this.state;
     return (
       <header data-testid="header-component">
-        <p>Header</p>
         <nav>
-          <Link to="/"> / </Link>
+          { carregando
+            ? <Loading />
+            : (
+              <p data-testid="header-user-name">
+                { usuarioLogado.name }
+              </p>
+            )}
           <Link to="/search"> Search </Link>
           <Link to="/album/:id"> Album </Link>
           <Link to="/favorites"> Favorites </Link>
