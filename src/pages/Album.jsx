@@ -28,8 +28,15 @@ class Album extends React.Component {
         <Header />
         <p data-testid="artist-name">{ nomeArtista }</p>
         <p data-testid="album-name">{ nomeAlbum }</p>
-        { console.log(infosAlbum) }
-        <MusicCard infosAlbum={ infosAlbum } />
+        { infosAlbum.filter((obj) => obj.previewUrl).map((musica) => (
+          <MusicCard
+            key={ musica.trackId }
+            musicaNome={ musica.trackName }
+            musicaID={ musica.trackId }
+            musicaURL={ musica.previewUrl }
+            musicaObj={ musica }
+          />
+        )) }
       </div>
     );
   }
