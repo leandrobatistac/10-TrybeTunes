@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
 import Loading from './Loading';
 
 class MusicCard extends React.Component {
@@ -25,6 +25,9 @@ class MusicCard extends React.Component {
 
     if (checked === true) {
       this.setState({ checked: false });
+      this.setState({ carregando: true });
+      await removeSong(musicaObj);
+      this.setState({ carregando: false });
     } else {
       this.setState({ checked: true });
       this.setState({ carregando: true });
@@ -43,29 +46,31 @@ class MusicCard extends React.Component {
     const { carregando, checked } = this.state;
 
     return (
-      <div key={ musicaID }>
-        { carregando ? <Loading /> : (
-          <div>
-            <p>{ musicaNome }</p>
-            <audio data-testid="audio-component" src={ musicaURL } controls>
-              <track kind="captions" />
-              O seu navegador não suporta o elemento
-              <code>audio</code>
-            </audio>
+      <div>
+        { carregando
+          ? <Loading />
+          : (
+            <div>
+              <p>{ musicaNome }</p>
+              <audio data-testid="audio-component" src={ musicaURL } controls>
+                <track kind="captions" />
+                O seu navegador não suporta o elemento
+                <code>audio</code>
+              </audio>
 
-            <label htmlFor="checkbox">
-              Favorita
-              <input
-                data-testid={ `checkbox-music-${musicaID}` }
-                type="checkbox"
-                id="checkbox"
-                name={ musicaID }
-                checked={ checked }
-                onChange={ this.handleChange }
-              />
-            </label>
-          </div>
-        ) }
+              <label htmlFor="checkbox">
+                Favorita
+                <input
+                  data-testid={ `checkbox-music-${musicaID}` }
+                  type="checkbox"
+                  id="checkbox"
+                  name={ musicaID }
+                  checked={ checked }
+                  onChange={ this.handleChange }
+                />
+              </label>
+            </div>
+          ) }
       </div>
     );
   }
