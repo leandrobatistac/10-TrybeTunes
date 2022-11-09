@@ -34,7 +34,6 @@ class Search extends React.Component {
     this.setState({ carregando: true });
     const { pesquisarArtista } = this.state;
     const albunsPesquisados = await searchAlbumsAPI(pesquisarArtista);
-    console.log(albunsPesquisados);
     this.setState({
       pesquisarArtista: '',
       carregando: false,
